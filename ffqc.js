@@ -52,7 +52,7 @@ function getCookie() {
 		if(token){
 			$.setdata(token, _key);
 			$.msg($.name, `获取${authenticationName}成功🎉`, token);
-			getContents();
+			$.getContents();
 		} else {
 			$.msg($.name, "", `错误获取签到${authenticationName}失败`);
 		}
