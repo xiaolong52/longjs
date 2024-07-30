@@ -53,7 +53,7 @@ function getCookie() {
         let token = $request.headers.token;
 		if(token){
 			$.setdata(token, _key);
-			$.msg($.name, `获取${authenticationName}成功🎉`, token);
+			$.msg($.name, `获取${authenticationName}成功啦🎉`, token);
 			
 		} else {
 			$.msg($.name, "", `错误获取签到${authenticationName}失败`);
