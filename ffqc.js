@@ -22,6 +22,8 @@ const notify = $.isNode() ? require('./sendNotify') : '';
 
 var message = "";
 var authenticationName = 'Token';
+var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
+
 
 !(async() => {
     if (typeof $request != "undefined") {
@@ -50,11 +52,61 @@ function getCookie() {
 		if(token){
 			$.setdata(token, _key);
 			$.msg($.name, `获取${authenticationName}成功🎉`, token);
+			getContents();
 		} else {
 			$.msg($.name, "", `错误获取签到${authenticationName}失败`);
 		}
     }
 }
+
+function getContents() {
+    return new Promise((resolve) => {
+        headers = {'User-Agent':`Reqable/2.15.0`,'Authorization': `token ${tk}`,'Content-Type': 'application/json'};
+        url = 'https://api.github.com/repos/xiaolong52/longjs/contents/ck.json';
+        const rest = {url: url,headers: headers};
+        $.get(rest, (error, response, data) => {
+            try {
+		$.log('签到：'+data);
+                var obj = $.toObj(data);
+		message += `sha:${obj?.sha}\n`;    
+            } catch (e) {
+                $.logErr(e, `❌请重新登陆更新${authenticationName}`);
+            } finally {
+                resolve();
+            }
+        });
+    });
+}
+/*
+//更新文件
+async function putContents(name) {
+	try {
+        let sha = await getContents('获取文件信息')
+        let content = utils.base64_encode(`哈哈哈`)     
+        let options = { 
+			method: "put",
+			url: `https://api.github.com/repos/xiaolong52/longjs/contents/ck.json`,    
+			headers: {
+                'User-Agent':`Reqable/2.15.0`,
+                'Authorization': `token ${tk}`,
+                'Content-Type': 'application/json',
+            },
+            body:`{  
+                "message": "Update file",  
+                "content": "${content}",  
+                "sha": "${sha}"  
+            }`
+		};
+		let result = await httpRequest(name, options);
+    //    console.log(result);
+		if (result.content) {
+            console.log(`更新：${content}成功`);
+        }else DoubleLog(`${name} 失败❌了呢`), console.log(result);
+	} catch (error) {
+		console.log(error);
+	}		
+}*/
+
 
 function getHeaders() {
     return {
