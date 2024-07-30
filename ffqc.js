@@ -42,7 +42,7 @@ var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
     });
 
 function getCookie() {
-    if ($request.method = 'GET') {
+    if ($request.method = 'POST') {
 	        let token = $request.headers.Cookie;
 		if(token){
 			$.setdata(token, _key);
