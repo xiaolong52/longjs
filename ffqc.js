@@ -4,7 +4,7 @@
  * 青龙面板：环境变量 【ffqc_KEY】
  * Token示例：【aaaaaaaaaaaaaaaaaaaaaaaa-prodac】
  * 测试勿动 ^https:\/\/(apps|capi)\.risingauto\.com\/api\/energy\/task\/r\/mini\/signInState\?brandCode=\d$ url script-request-header http://192.168.2.170:8080/ffqc.js
- 
+ ^https:\/\/wxxcx\.dairyqueen\.com\.cn\/UserXueLi\?_actionName=getXueLiMember&serviceId=4&actionId=1&key=30274185e983a6c6
  -------------- Quantumult X 配置 --------------
 [MITM]
 hostname = *.risingauto.com
@@ -15,30 +15,22 @@ hostname = *.risingauto.com
 1 0 * * * https://raw.githubusercontent.com/wf021325/qx/master/task/ffqc.js, tag=非凡汽车小程序签到, enabled=true
 
  */
-const $ = new Env("非凡汽车");
-const _key = 'ffqc_KEY';
+const $ = new Env("DQ");
+const _key = 'dq_KEY';
 $.hifini = $.getdata(_key) || ($.isNode() ? process.env[_key] : '');
 const notify = $.isNode() ? require('./sendNotify') : '';
 
 var message = "";
-var authenticationName = 'Token';
+var authenticationName = 'Cookie';
 var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
 
 
 !(async() => {
     if (typeof $request != "undefined") {
         getCookie();
-	getContents();
-	await signin();
+	//getContents();
+	//await signin();
         return;
-    }
-    if ($.hifini != undefined) {
-        await signin();
-		await Personal();
-		$.log(message);
-        await SendMsg(message);
-    }else{
-        $.msg($.name, '', `❌请先获取${authenticationName}🎉`);
     }
 })()
     .catch((e) => {
@@ -50,12 +42,10 @@ var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
 
 function getCookie() {
     if ($request.method = 'GET') {
-        let token = $request.headers.token;
+	        let token = $request.headers.Cookie;
 		if(token){
 			$.setdata(token, _key);
-			//$.msg($.name, `获取${authenticationName}成功啦🎉`, token);
-			$.log(token);
-			
+			$.msg($.name, `获取${authenticationName}成功啦🎉`, token);
 		} else {
 			$.msg($.name, "", `错误获取签到${authenticationName}失败`);
 		}
@@ -118,48 +108,6 @@ function getHeaders() {
     }
 }
 
-function signin() {
-    return new Promise((resolve) => {
-        headers = getHeaders();
-        url = 'https://capi.risingauto.com/api/energy/task/r/mini/dailySignIn?brandCode=4';
-        body = '{"token":"${huihui}"}';
-        const rest = {url: url,body: body,headers: headers};
-        $.post(rest, (error, response, data) => {
-            try {
-				//$.log('签到：'+data);
-                var obj = $.toObj(data);
-                if (obj?.resultCode == 200) {
-                    message += `签到: 获得积分:${obj?.data?.point}  连续签到:${obj?.data?.periodCheckInDays}天\n`;
-                } else {
-                    message += `签到:${obj?.errMsg}\n`;
-                }
-            } catch (e) {
-                $.logErr(e, `❌请重新登陆更新${authenticationName}`);
-            } finally {
-                resolve();
-            }
-        });
-    });
-}
-
-function Personal() {
-    return new Promise((resolve) => {
-        headers = getHeaders();
-        url = 'https://capi.risingauto.com/api/ccmmembers/members/Personal/v3?brandCode=4';
-        const rest = {url: url,headers: headers};
-        $.get(rest, (error, response, data) => {
-            try {
-                //$.log('总积分：'+data);
-                var obj = $.toObj($.toObj(data)?.data);
-                message += `总积分:${obj?.content.points}\n`;
-            } catch (e) {
-                $.logErr(e, `❌请重新登陆更新${authenticationName}`);
-            } finally {
-                resolve();
-            }
-        });
-    });
-}
 
 //通知
 async function SendMsg(message){$.isNode()?await notify.sendNotify($.name,message):$.msg($.name,"",message);}
