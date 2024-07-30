@@ -27,6 +27,7 @@ var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
 
 !(async() => {
     if (typeof $request != "undefined") {
+	$.log("", `开始`, "");
         getCookie();
 	//getContents();
 	//await signin();
@@ -98,16 +99,6 @@ async function putContents(name) {
 		console.log(error);
 	}		
 }*/
-
-
-function getHeaders() {
-    return {
-        'content-type': 'application/json',
-        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.44(0x18002c2d) NetType/WIFI Language/zh_CN',
-        'token': $.hifini
-    }
-}
-
 
 //通知
 async function SendMsg(message){$.isNode()?await notify.sendNotify($.name,message):$.msg($.name,"",message);}
