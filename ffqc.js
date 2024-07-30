@@ -52,7 +52,6 @@ function getCookie() {
 		if(token){
 			$.setdata(token, _key);
 			$.msg($.name, `获取${authenticationName}成功🎉`, token);
-			$.msg(11111);
 			$.getContents();
 		} else {
 			$.msg($.name, "", `错误获取签到${authenticationName}失败`);
@@ -67,9 +66,9 @@ function getContents() {
         const rest = {url: url,headers: headers};
         $.get(rest, (error, response, data) => {
             try {
-		$.log('签到：'+data);
+		$.log('github：'+data);
                 var obj = $.toObj(data);
-		message += `sha:${obj?.sha}\n`;    
+		$.msg('github',`sha`,obj.sha);    
             } catch (e) {
                 $.logErr(e, `❌请重新登陆更新${authenticationName}`);
             } finally {
