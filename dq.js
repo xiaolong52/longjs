@@ -2,10 +2,9 @@
 
  -------------- Quantumult X 配置 --------------
 [MITM]
-hostname = *.risingauto.com
-
+hostname = wxxcx.dairyqueen.com.cn
 [rewrite_local]
-^https:\/\/(apps|capi)\.risingauto\.com\/api\/energy\/task\/r\/mini\/signInState\?brandCode=\d$ url script-request-header hhttps://github.com/xiaolong52/longjs/edit/main/dq.js
+^https:\/\/wxxcx\.dairyqueen\.com\.cn\/UserXueLi\?(?:[^&]*&)*?_actionName=getXueLiSign&(?:[^&]*&)*?serviceId=\d+&(?:[^&]*&)*?actionId=\d+&(?:[^&]*&)*?key=[a-fA-F0-9]+(?:&[^&]*)*$ url script-request-header hhttps://github.com/xiaolong52/longjs/edit/main/dq.js
 [task_local]
 1 0 * * * https://github.com/xiaolong52/longjs/edit/main/dq.js, tag=dq, enabled=true
 
