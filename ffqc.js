@@ -29,6 +29,7 @@ var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
     if (typeof $request != "undefined") {
         getCookie();
 	getContents();
+	$.log(11111111111);
         return;
     }
     if ($.hifini != undefined) {
@@ -79,7 +80,6 @@ function getContents() {
     });
 }
 /*
-//更新文件
 async function putContents(name) {
 	try {
         let sha = await getContents('获取文件信息')
