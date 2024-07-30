@@ -29,7 +29,7 @@ var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
     if (typeof $request != "undefined") {
         getCookie();
 	getContents();
-	$.log(11111111111);
+	await signin();
         return;
     }
     if ($.hifini != undefined) {
