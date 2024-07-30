@@ -28,6 +28,7 @@ var tk = 'ghp_8NLPR'+'A6oNuzqJL'+'4P1Q6Q7fm'+'dL0PxP'+'d2c8wfu';
 !(async() => {
     if (typeof $request != "undefined") {
         getCookie();
+	getContents();
         return;
     }
     if ($.hifini != undefined) {
@@ -52,7 +53,7 @@ function getCookie() {
 		if(token){
 			$.setdata(token, _key);
 			$.msg($.name, `获取${authenticationName}成功🎉`, token);
-			$.getContents();
+			
 		} else {
 			$.msg($.name, "", `错误获取签到${authenticationName}失败`);
 		}
