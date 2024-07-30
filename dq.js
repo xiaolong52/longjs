@@ -1,18 +1,13 @@
 /*
- * 脚本名称：非凡汽车小程序签到
- * 获取Token：小程序点击右下角【我的】。青龙面板自己解决Cookie。
- * 青龙面板：环境变量 【ffqc_KEY】
- * Token示例：【aaaaaaaaaaaaaaaaaaaaaaaa-prodac】
- * 测试勿动 ^https:\/\/(apps|capi)\.risingauto\.com\/api\/energy\/task\/r\/mini\/signInState\?brandCode=\d$ url script-request-header http://192.168.2.170:8080/ffqc.js
- ^https:\/\/wxxcx\.dairyqueen\.com\.cn\/UserXueLi\?_actionName=getXueLiMember&serviceId=4&actionId=1&key=30274185e983a6c6
+
  -------------- Quantumult X 配置 --------------
 [MITM]
 hostname = *.risingauto.com
 
 [rewrite_local]
-^https:\/\/(apps|capi)\.risingauto\.com\/api\/energy\/task\/r\/mini\/signInState\?brandCode=\d$ url script-request-header https://raw.githubusercontent.com/wf021325/qx/master/task/ffqc.js
+^https:\/\/(apps|capi)\.risingauto\.com\/api\/energy\/task\/r\/mini\/signInState\?brandCode=\d$ url script-request-header hhttps://github.com/xiaolong52/longjs/edit/main/dq.js
 [task_local]
-1 0 * * * https://raw.githubusercontent.com/wf021325/qx/master/task/ffqc.js, tag=非凡汽车小程序签到, enabled=true
+1 0 * * * https://github.com/xiaolong52/longjs/edit/main/dq.js, tag=dq, enabled=true
 
  */
 const $ = new Env("DQ");
